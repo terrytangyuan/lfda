@@ -20,7 +20,12 @@ Cols <- function(vec){
 #' a 3D visualization on the transformed data.
 #'
 #' @param dat The original data.
+#' @param cleanText A boolean value to specify whether the class labels need to be cleaned.(default:FALSE)
 #' @param method The metric learning method used to transform the original data. It can be "lfda" or "klfda".
+#'
+#' @return list of the LFDA results:
+#' \item{T}{d x r transformation matrix (Z = t(T) * X)}
+#' \item{Z}{r x n matrix of dimensionality reduced samples}
 #'
 #' @seealso See \code{\link{lfda}} and \code{\link{klfda}} for the metric learning method used for this visualization.
 #'
@@ -28,7 +33,7 @@ Cols <- function(vec){
 #'
 #' @export
 #'
-MetricTransformedViz <- function(dat, method=c("lfda", "klfda")){
+MetricTransformedViz <- function(dat, cleanText=FALSE, method=c("lfda", "klfda")){
   ## Apply Metric Learning ##
   k <- kmatrixGauss(x = dat[,-1]) # apply Gaussian Kernel
   y <- dat[,1]
@@ -48,19 +53,26 @@ MetricTransformedViz <- function(dat, method=c("lfda", "klfda")){
     colnames(transformedData)[1] <- "Class"
   }
 
-  ## Show The Text of Each Style Only Once ##
-  newData <- suppressWarnings( # known warnings
-    plyr::ddply(transformedData, plyr::.(Class), function(x){
-    x[-1, "Class"] <- ""
-    return(x)
-  }))
-  df <- sapply(newData[,"Class"], as.character)
-  df[is.na(df)] <- "."
-  newData[,"Class"] <- df
+  if(cleanText){
+    ## Show The Text of Each Style Only Once ##
+    newData <- suppressWarnings( # known warnings
+      plyr::ddply(transformedData, plyr::.(Class), function(x){
+        x[-1, "Class"] <- ""
+        return(x)
+      }))
+    df <- sapply(newData[,"Class"], as.character)
+    df[is.na(df)] <- "."
+    newData[,"Class"] <- df
+  } else {
+    newData <- transformedData
+  }
+
 
   ## 3D Visualization on Metric Transformed Dataset ##
   rgl::text3d(newData[,2],newData[,3], newData[,4], col=Cols(transformedData$Class),
               main="3D Visualization of Metric Transformed Data", size=4,
               texts=newData$Class, font=1, cex=1.2)
   rgl::axes3d()
+
+  return(result)
 }

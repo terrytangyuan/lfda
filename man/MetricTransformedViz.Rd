@@ -4,12 +4,19 @@
 \alias{MetricTransformedViz}
 \title{3D Visualization on Metric Transformed Data}
 \usage{
-MetricTransformedViz(dat, method = c("lfda", "klfda"))
+MetricTransformedViz(dat, cleanText=FALSE, method = c("lfda", "klfda"))
 }
 \arguments{
 \item{dat}{The original data.}
 
+\item{cleanText}{A boolean value to specify whether the class labels need to be cleaned.(default:FALSE)}
+
 \item{method}{The metric learning method used to transform the original data. It can be "lfda" or "klfda".}
+}
+\value{
+list of the LFDA results:
+\item{T}{d x r transformation matrix (Z = t(T) * X)}
+\item{Z}{r x n matrix of dimensionality reduced samples}
 }
 \description{
 This function performs metric learning on the given dataset and runs
