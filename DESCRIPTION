@@ -1,0 +1,18 @@
+Package: lfda
+Type: Package
+Title: Local Fisher Discriminant Analysis
+Version: 0.0.1
+Date: 2015-08-10
+Author: Yuan Tang<terrytangyuan@gmail.com>
+Maintainer: Yuan Tang<terrytangyuan@gmail.com>
+Description: This package is used to perform metric learning methods, particularly Local Fisher Discriminant Analysis
+Depends:
+    plyr,
+    caret, 
+    rARPACK
+Imports:
+    plyr
+
+
+
+    
