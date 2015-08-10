@@ -1,13 +1,12 @@
 Package: lfda
 Type: Package
 Title: Local Fisher Discriminant Analysis
-Version: 0.0.1
+Version: 0.0.2
 Date: 2015-08-10
 Author: Yuan Tang <terrytangyuan@gmail.com>
 Maintainer: Yuan Tang <terrytangyuan@gmail.com>
 License: MIT + file LICENSE
-Description: Functions for metric learning methods, particularly
-  Local Fisher Discriminant Analysis.
+Description: Functions for performing and visualizing Local Fisher Discriminant Analysis(LFDA), including Kernel Fisher Discriminant Analysis(KLFDA) for non-linear metric learning, and Semi-supervised Local Fisher Discriminant Analysis(SELF). 
 Imports:
     plyr,
     grDevices,
