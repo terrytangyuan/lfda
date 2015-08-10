@@ -83,7 +83,10 @@ Local Fisher discriminant analysis for supervised dimensionality reduction.
 In W. W. Cohen and A. Moore (Eds.), \emph{Proceedings of 23rd International
 Conference on Machine Learning (ICML2006)}, 905--912.
 }
-
+\seealso{
+See \code{\link{klfda}} for the kernelized variant of
+         LFDA (Kernel LFDA).
+}
 \keyword{discriminant}
 \keyword{fisher}
 \keyword{lfda}
