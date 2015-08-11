@@ -154,6 +154,7 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
   )
 
   Z <- t(t(Tr) %*% x) # transformed data
-
-  return(list("T" = Tr, "Z" = Z))
+  out <- list("T" = Tr, "Z" = Z)
+  class(out) <- 'lfda'
+  return(out)
 }
