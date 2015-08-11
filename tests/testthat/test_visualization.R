@@ -8,7 +8,7 @@ test_that('klfda visualization works', {
   r <- 3
   result <- klfda(k,y,r,metric="plain")
   options(rgl.useNULL=TRUE) # deal with rgl in Travis
-  plot(result, iris[,5])
+  expect_that(plot(result, iris[,5]), not(throws_error()))
 })
 
 test_that('lfda visualization works', {
@@ -17,7 +17,7 @@ test_that('lfda visualization works', {
   r <- 3
   result <- lfda(k,y,r,metric="plain")
   options(rgl.useNULL=TRUE) # deal with rgl in Travis
-  plot(result, iris[,5])
+  expect_that(plot(result, iris[,5]), not(throws_error()))
 })
 
 test_that('exceptions are caught in visualization function', {
@@ -26,8 +26,9 @@ test_that('exceptions are caught in visualization function', {
   r <- 3
   result <- lfda(k,y,r,metric="plain")
   options(rgl.useNULL=TRUE) # deal with rgl in Travis
-  plot(result, iris[,5], cleanText=TRUE)
+  expect_that(plot(result, iris[,5], cleanText=TRUE), not(throws_error()))
   expect_error(plot(result, iris[,1:5]))
   expect_error(plot(result, iris[1:10,5]))
   expect_error(plot(result, iris[,5], cleanText=3))
+  expect_that(plot(result, as.character(iris[,5])), not(throws_error()))
 })
