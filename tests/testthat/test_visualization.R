@@ -27,4 +27,7 @@ test_that('exceptions are caught in visualization function', {
   result <- lfda(k,y,r,metric="plain")
   options(rgl.useNULL=TRUE) # deal with rgl in Travis
   plot(result, iris[,5], cleanText=TRUE)
+  expect_error(plot(result, iris[,1:5]))
+  expect_error(plot(result, iris[1:10,5]))
+  expect_error(plot(result, iris[,5], cleanText=3))
 })
