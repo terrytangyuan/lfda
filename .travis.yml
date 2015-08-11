@@ -13,5 +13,9 @@ notifications:
     on_success: change
     on_failure: change
 
+r_github_packages:
+  - hadley/devtools
+  - jimhester/covr
+
 after_success:
   - Rscript -e 'library(covr);coveralls()'
