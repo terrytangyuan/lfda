@@ -57,6 +57,8 @@ plot.lfda <- function(x, labels, cleanText=FALSE, ...){
     newData <- transformedData
   }
 
+  options(rgl.useNULL=TRUE) # deal with rgl in Travis
+
   ## Plot 3D Visualization of LFDA Result ##
   rgl::text3d(newData[,2],newData[,3], newData[,4], col=Cols(transformedData$Class),
               main="3D Visualization of Metric Transformed Data", size=4,
