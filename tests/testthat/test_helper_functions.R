@@ -1,4 +1,4 @@
-context('klfda')
+context('helper functions')
 
 data(iris)
 
