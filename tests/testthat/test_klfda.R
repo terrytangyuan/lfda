@@ -2,10 +2,6 @@ context('klfda')
 
 data(iris)
 
-test_that('kmatrixGauss function works', {
-  expect_that(kmatrixGauss(iris[,-5]), not(throws_error()))
-})
-
 test_that('klfda works', {
   k <- kmatrixGauss(iris[,-5])
   y <- iris[,5]
