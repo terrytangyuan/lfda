@@ -7,19 +7,33 @@ sudo: required
 env:
  global:
    - CRAN: http://cran.rstudio.com
+   - RGL_USE_NULL: true
 
 notifications:
   email:
     on_success: change
     on_failure: change
 
+apt_packages:
+  - freeglut3-dev
+  - xvfb
+  - xserver-xorg-core
+  - xserver-xorg
+  - xorg
+  - openbox
+  - xauth
+
+r_binary_packages:
+    - plyr
+    - rARPACK
+    - rgl
+
 r_github_packages:
   - hadley/devtools
   - jimhester/covr
 
-before_install:
-    - sudo apt-get update -qq
-    - sudo apt-get install -qq r-cran-dev xorg-dev libglu1-mesa-dev
-
 after_success:
   - Rscript -e 'library(covr);coveralls()'
+
+after_failure:
+  - Rscript -e 'devtools::load_all(); devtools::test()'

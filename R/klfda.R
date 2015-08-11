@@ -138,6 +138,7 @@ klfda <- function (k, y, r, metric = c('weighted', 'orthonormalized', 'plain'),
 	)
 
 	Z = t(t(Tr) %*% k) # transformed data
-
-	return(list("T" = Tr, "Z" = Z))
+	out <- list("T" = Tr, "Z" = Z)
+	class(out) <- 'lfda'
+	return(out)
 }

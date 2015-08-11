@@ -17,5 +17,5 @@ test_that('klfda visualization works', {
   r <- 3
   result <- klfda(k,y,r,metric="plain")
   options(rgl.useNULL=TRUE) # deal with rgl in Travis
-  expect_that(plot.lfda(result, iris[,5]), not(throws_error()))
+  plot(result, iris[,5])
 })

@@ -25,7 +25,8 @@ Cols <- function(vec){
 #'
 #' @import rgl
 #'
-#' @export plot.lfda
+#' @method plot lfda
+#' @export
 #'
 #' @seealso See \code{\link{lfda}} and \code{\link{klfda}} for the metric learning method used for this visualization.
 #'
@@ -56,6 +57,8 @@ plot.lfda <- function(x, labels, cleanText=FALSE, ...){
   } else{
     newData <- transformedData
   }
+
+  #options(rgl.useNULL=TRUE) # deal with rgl in Travis
 
   ## Plot 3D Visualization of LFDA Result ##
   rgl::text3d(newData[,2],newData[,3], newData[,4], col=Cols(transformedData$Class),
