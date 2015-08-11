@@ -16,10 +16,10 @@ notifications:
 r_github_packages:
   - hadley/devtools
   - jimhester/covr
-  
+
 before_install:
     - sudo apt-get update -qq
-    - sudo apt-get install -qq freeglut3-dev xorg openbox
- 
+    - sudo apt-get install -qq r-cran-dev xorg-dev libglu1-mesa-dev
+
 after_success:
-  - Rscript -e 'library(covr);coveralls();options(rgl.useNULL=TRUE)'
+  - Rscript -e 'library(covr);coveralls()'
