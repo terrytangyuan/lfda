@@ -13,14 +13,3 @@ test_that('lfda works', {
   # case when r=d
   expect_that(lfda(k,y,r=4,metric="plain"), not(throws_error()))
 })
-
-test_that('lfda visualization works', {
-  k <- iris[,-5]
-  y <- iris[,5]
-  r <- 3
-  result <- lfda(k,y,r,metric="plain")
-  options(rgl.useNULL=TRUE) # deal with rgl in Travis
-  plot(result, iris[,5])
-})
-
-
