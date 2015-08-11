@@ -19,7 +19,7 @@ r_github_packages:
   
 before_install:
     - sudo apt-get update -qq
-    - sudo apt-get install -qq freeglut3-dev xorg openbox libglu1-mesa-dev
+    - sudo apt-get install -qq freeglut3-dev xorg openbox
  
 after_success:
-  - Rscript -e 'library(covr);coveralls()'
+  - Rscript -e 'library(covr);coveralls();options(rgl.useNULL=TRUE)'
