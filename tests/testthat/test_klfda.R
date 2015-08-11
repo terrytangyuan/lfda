@@ -7,9 +7,18 @@ test_that('kmatrixGauss function works', {
 })
 
 test_that('klfda works', {
-  #TODO
+  k <- kmatrixGauss(iris[,-5])
+  y <- iris[,5]
+  r <- 3
+  expect_that(klfda(k,y,r,metric="plain"), not(throws_error()))
+  expect_that(klfda(k,y,r,metric="weighted"), not(throws_error()))
+  expect_that(klfda(k,y,r,metric="orthonormalized"), not(throws_error()))
+})
+
+test_that('klfda visualization works', {
   k <- kmatrixGauss(iris[,-5])
   y <- iris[,5]
   r <- 3
   result <- klfda(k,y,r,metric="plain")
+  expect_that(plot.lfda(result, iris[,5]), not(throws_error()))
 })

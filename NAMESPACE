@@ -2,12 +2,11 @@
 
 export("%^%")
 export(Cols)
-export(MetricTransformedViz)
 export(klfda)
 export(kmatrixGauss)
 export(lfda)
+export(plot.lfda)
 export(repmat)
 import(grDevices)
-import(plyr)
 import(rARPACK)
 import(rgl)

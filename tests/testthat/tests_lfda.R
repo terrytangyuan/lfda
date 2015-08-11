@@ -1,13 +1,22 @@
 context('lfda')
+
+data(iris)
+
 test_that('lfda works', {
-  #TODO
-  data(iris)
+  k <- iris[,-5]
+  y <- iris[,5]
+  r <- 3
+  expect_that(lfda(k,y,r,metric="plain"), not(throws_error()))
+  expect_that(lfda(k,y,r,metric="weighted"), not(throws_error()))
+  expect_that(lfda(k,y,r,metric="orthonormalized"), not(throws_error()))
+})
+
+test_that('lfda visualization works', {
   k <- iris[,-5]
   y <- iris[,5]
   r <- 3
   result <- lfda(k,y,r,metric="plain")
+  expect_that(plot.lfda(result, iris[,5]), not(throws_error()))
 })
-
-
 
 
