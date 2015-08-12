@@ -3,7 +3,7 @@ Type: Package
 Title: Local Fisher Discriminant Analysis
 Version: 1.0.0
 Date: 2015-08-10
-Author: Yuan Tang <terrytangyuan@gmail.com> and Zachary Deane-Mayer <zach.mayer@gmail.com>
+Author: Yuan Tang <terrytangyuan@gmail.com> with great contributions from Zachary Deane-Mayer.
 URL: https://github.com/terrytangyuan/lfda
 BugReports: https://github.com/terrytangyuan/lfda/issues
 Maintainer: Yuan Tang <terrytangyuan@gmail.com>
