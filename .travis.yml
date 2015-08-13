@@ -22,7 +22,7 @@ apt_packages:
   - xorg
   - openbox
   - xauth
-  - libssh2-1-dev
+  - libssl-dev
 
 r_binary_packages:
     - plyr
