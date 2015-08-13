@@ -22,7 +22,6 @@ apt_packages:
   - xorg
   - openbox
   - xauth
-  - libssl-dev
 
 r_binary_packages:
     - plyr
