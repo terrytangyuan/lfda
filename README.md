@@ -4,7 +4,12 @@
 # lfda
 R package for Local Fisher Discriminant Analysis
 
-To install the latest development version from github:
+## Install the current release from CRAN:
+```r
+install.packages('caret')
+```
+
+## Install the latest development version from github:
 ```{R}
 devtools::install_github('terrytangyuan/lfda')
 ```
