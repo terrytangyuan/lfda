@@ -22,6 +22,8 @@ apt_packages:
   - xorg
   - openbox
   - xauth
+  - libcurl4-openssl-dev
+  - curl
 
 r_binary_packages:
     - plyr
@@ -31,6 +33,9 @@ r_binary_packages:
 r_github_packages:
   - hadley/devtools
   - jimhester/covr
+  
+before_install:
+  - echo "options(repos = c(CRAN='http://cran.rstudio.com'))" >> ~/.Rprofile
 
 after_success:
   - Rscript -e 'library(covr);coveralls()'
