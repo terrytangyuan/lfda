@@ -158,3 +158,37 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
   class(out) <- 'lfda'
   return(out)
 }
+#' LFDA Transformation/Prediction on New Data
+#'
+#' This function transforms a data set, usually a testing set, using the trained LFDA metric
+#' @param object The result from lfda function, which contains a transformed data and a transforming
+#'        matrix that can be used for transforming testing set
+#' @param newdata The data to be transformed
+#' @param type The output type, in this case it defaults to "raw" since the output is a matrix
+#' @param ... Additional arguments
+#' @return the transformed matrix
+#' @author Yuan Tang
+predict.lfda <- function(object, newdata = NULL, type = "raw", ...){
+
+  if(is.null(newdata)){stop("You must provide data to be used for transformation. ")}
+  if(type!="raw"){stop('Types other than "raw" are currently unavailable. ')}
+  if(is.data.frame(newdata)) newdata <- as.matrix(newdata)
+
+  transformMatrix <- object$T
+
+  result <- newdata %*% transformMatrix
+  result
+}
+
+print.lfda <- function(x, ...){
+  cat("Results for Local Fisher Discriminant Analysis \n\n")
+  cat("The trained transforming matric is: \n")
+  print(head(x$T))
+
+  cat("\n\n The original data set after applying this metric transformation is:  \n")
+  print(head(x$Z))
+
+  cat("\n")
+  cat("Only partial output is shown above. Please see the model output for more details. \n")
+  invisible(x)
+}
