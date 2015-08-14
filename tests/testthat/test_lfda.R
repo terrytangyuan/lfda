@@ -12,4 +12,10 @@ test_that('lfda works', {
 
   # case when r=d
   expect_that(lfda(k,y,r=4,metric="plain"), not(throws_error()))
+
+  model <- lfda(k,y,r=4,metric="plain")
+  expect_that(predict(model, iris[,-5]), not(throws_error()))
+  expect_error(predict(model, iris[,-5], "wrongType"))
+  expect_error(predict(model))
+  expect_that(capture.output(print(model)), not(throws_error())) # suppress printing
 })
