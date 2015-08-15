@@ -4,7 +4,8 @@
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](http://badges.mit-license.org)
 
 # lfda
-R package for Local Fisher Discriminant Analysis
+R package for performing and visualizing *Local Fisher Discriminant Analysis* and *Kernel Local Fisher Discriminant Analysis*.
+Introduction to the algorithms and their application can be found [here](https://gastrograph.com/resources/whitepapers/local-fisher-discriminant-analysis-on-beer-style-clustering.html). For example usage of the code, please first take a look at the [tests code](https://github.com/terrytangyuan/lfda/tree/master/tests/testthat) at this moment.
 
 ## Install the current release from CRAN:
 ```{R}
