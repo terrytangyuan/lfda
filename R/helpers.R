@@ -55,3 +55,22 @@ getAffinityMatrix <- function(distance2, knn, nc){
   A[flag] = exp(-distance2[flag]/localscale[flag])
   return(A)
 }
+#' Get Requested Type of Transforming Metric
+#'
+#' This function returns the requested type of transforming metric.
+#'
+#' @param metric The type of metric to be requested
+#' @param eigVec The eigenvectors of the problem
+#' @param eigVal The eigenvalues of the problem
+#' @param total The number of total rows to be used for weighting denominator
+#'
+#' @return The transformation metric in requested type
+#' @export
+getMetricOfType <- function(metric, eigVec, eigVal, total){
+  return(switch(metric,
+                # this weighting scheme is explained in section 3.3 in the first reference
+                weighted = eigVec * repmat(t(sqrt(eigVal)), total, 1),
+                orthonormalized = qr.Q(qr(eigVec)),
+                plain = eigVec
+  ))
+}

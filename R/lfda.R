@@ -129,20 +129,13 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
   } else {
     # dimensionality reduction (select only the r largest eigenvalues of the problem)
     eigTmp <- rARPACK::eigs(A=solve(tSw) %*% tSb,k=r,which='LM') # r largest magnitude eigenvalues
-    eigVec <- eigTmp$vectors
+    eigVec <- eigTmp$vectors # the raw transforming matrix
     eigVal <- as.matrix(eigTmp$values)
   }
 
-  T0 <- eigVec # the raw transforming matrix
-
   # options to require a particular type of returned transform matrix
   # transforming matrix (do not change the "=" in the switch statement)
-  Tr <- switch(metric,
-    # this weighting scheme is explained in section 3.3 in the first reference
-    weighted = T0 * repmat(t(sqrt(eigVal)), d, 1),
-    orthonormalized = qr.Q(qr(T0)),
-    plain = T0
-  )
+  Tr <- getMetricOfType(metric, eigVec, eigVal, d)
 
   Z <- t(t(Tr) %*% x) # transformed data
   out <- list("T" = Tr, "Z" = Z)

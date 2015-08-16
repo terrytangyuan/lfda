@@ -114,19 +114,12 @@ klfda <- function (k, y, r, metric = c('weighted', 'orthonormalized', 'plain'),
 
 	# find generalized eigenvalues and normalized eigenvectors of the problem
 	eigTmp <- rARPACK::eigs(A=solve(tSw + reg * diag(1, nrow(tSw), ncol(tSw))) %*% tSb,k=r,which='LM') # r largest magnitude eigenvalues
-	eigVec = eigTmp$vectors
+	eigVec = eigTmp$vectors # the raw transforming matrix
 	eigVal = as.matrix(eigTmp$values)
-
-	T0 = eigVec # the raw transforming matrix
 
 	# options to require a particular type of returned transform matrix
 	# transforming matrix (do not change the "=" in the switch statement)
-	Tr = switch(metric,
-	  # this weighting scheme is explained in section 3.3 in the first reference
-		weighted = T0 * repmat(t(sqrt(eigVal)), n, 1),
-		orthonormalized = qr.Q(qr(T0)),
-		plain = T0
-	)
+	Tr <- getMetricOfType(metric, eigVec, eigVal, n)
 
 	Z = t(t(Tr) %*% k) # transformed data
 	out <- list("T" = Tr, "Z" = Z)
