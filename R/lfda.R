@@ -152,6 +152,8 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
 #' @param ... Additional arguments
 #' @return the transformed matrix
 #' @author Yuan Tang
+#' @export
+#' @method predict lfda
 predict.lfda <- function(object, newdata = NULL, type = "raw", ...){
 
   if(is.null(newdata)){stop("You must provide data to be used for transformation. ")}
@@ -164,6 +166,13 @@ predict.lfda <- function(object, newdata = NULL, type = "raw", ...){
   result
 }
 
+#' Print an lfda object
+#'
+#' Print an lfda object
+#' @param x The result from lfda function, which contains a transformed data and a transforming
+#' @param ... ignored
+#' @export
+#' @method print lfda
 print.lfda <- function(x, ...){
   cat("Results for Local Fisher Discriminant Analysis \n\n")
   cat("The trained transforming matric is: \n")
