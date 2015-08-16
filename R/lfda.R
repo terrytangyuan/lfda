@@ -149,7 +149,7 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
 #' @param object The result from lfda function, which contains a transformed data and a transforming
 #'        matrix that can be used for transforming testing set
 #' @param newdata The data to be transformed
-#' @param type The output type, in this case it defaults to "raw" since the output is a matrix or "class" to get the final predicted classes.
+#' @param type The output type, in this case it defaults to "raw" since the output is a matrix, "class" to get the final predicted classes or "probs" to get predicted class probs.
 #' @param ... Additional arguments
 #' @return the transformed matrix
 #' @author Yuan Tang
@@ -163,17 +163,21 @@ predict.lfda <- function(object, newdata = NULL, type = "raw", ...){
   transformMatrix <- object$T
 
   result <- newdata %*% transformMatrix
-  colnames(result) <- object$levels
 
-  if(type == "class"){
+  if(type ==  'raw'){
+    return(result)
+  } else if(type == 'prob'){
+    result <- result[,-1]
+    colnames(result) <- object$levels
+    return(result)
+  }else if(type == "class"){
+    result <- result[,-1]
     result <- apply(result, 1, which.max)
     result <- object$levels[result]
+    return(result)
   } else if(type != 'raw'){
-    stop('Types other than "raw" and "class" are currently unavailable.')
+    stop('Types other than "raw", "class", and "probs" are currently unavailable.')
   }
-
-  result
-
 }
 
 #' Print an lfda object
