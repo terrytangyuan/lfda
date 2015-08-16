@@ -96,18 +96,9 @@ klfda <- function (k, y, r, metric = c('weighted', 'orthonormalized', 'plain'),
 		# Define classwise affinity matrix
 		Kccdiag = diag(Kcc) # diagonals of the class-specific data
 		distance2 = repmat(Kccdiag, 1, nc) + repmat(t(Kccdiag), nc, 1) - 2 * Kcc
-		sorted = apply(distance2, 2, sort) # sort for each column by distance
-		kNNdist2 = t(as.matrix(sorted[knn + 1, ])) # knn-th nearest neighbor
-		sigma = sqrt(kNNdist2)
 
-		localscale = t(sigma) %*% sigma
-		# use only non-zero entries in localscale since this will be used in the denominator
-		# to calculate the affinity matrix
-		flag = (localscale != 0)
-
-		# define affinity matrix - the larger the element in the matrix, the closer two data points are
-		A = mat.or.vec(nc, nc)
-		A[flag] = exp(-distance2[flag]/localscale[flag])
+		# Get affinity matrix
+		A <- getAffinityMatrix(distance2, knn, nc)
 
 		Kc1 = as.matrix(rowSums(Kc))
 		Z = Kc %*% (repmat(as.matrix(colSums(A)), 1, n) * t(Kc)) - Kc %*% A %*% t(Kc)

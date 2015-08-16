@@ -103,18 +103,9 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
     # calculate the distance, using a self-defined repmat function that's the same
     # as repmat() in Matlab
     distance2 <- repmat(Xc2, nc, 1) + repmat(t(Xc2), 1, nc) - 2 * t(Xc) %*% Xc
-    sorted <- apply(distance2, 2, sort) # sort for each column by distance
-    kNNdist2 <- t(as.matrix(sorted[knn + 1, ])) # knn-th nearest neighbor
-    sigma <- sqrt(kNNdist2)
 
-    localscale <- t(sigma) %*% sigma
-    # use only non-zero entries in localscale since this will be used in the denominator
-    # to calculate the affinity matrix
-    flag <- (localscale != 0)
-
-    # define affinity matrix - the larger the element in the matrix, the closer two data points are
-    A <- mat.or.vec(nc, nc)
-    A[flag] <- exp(-distance2[flag]/localscale[flag])
+    # Get affinity matrix
+    A <- getAffinityMatrix(distance2, knn, nc)
 
     Xc1 <- as.matrix(rowSums(Xc))
     G <- Xc %*% (repmat(as.matrix(colSums(A)), 1, d) * t(Xc)) - Xc %*% A %*% t(Xc)
