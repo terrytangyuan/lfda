@@ -93,7 +93,8 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
   tSw <- mat.or.vec(d, d) # initialize within-class scatter matrix (to be minimized)
 
   # compute the optimal scatter matrices in a classwise manner
-  for (i in unique(as.vector(t(y)))) {
+  y_levels <- sort(unique(as.vector(t(y))))
+  for (i in y_levels) {
 
     Xc <- x[, y == i] # data for this class
     nc <- ncol(Xc)
@@ -138,7 +139,7 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
   Tr <- getMetricOfType(metric, eigVec, eigVal, d)
 
   Z <- t(t(Tr) %*% x) # transformed data
-  out <- list("T" = Tr, "Z" = Z)
+  out <- list("T" = Tr, "Z" = Z, levels=y_levels)
   class(out) <- 'lfda'
   return(out)
 }
@@ -148,7 +149,7 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
 #' @param object The result from lfda function, which contains a transformed data and a transforming
 #'        matrix that can be used for transforming testing set
 #' @param newdata The data to be transformed
-#' @param type The output type, in this case it defaults to "raw" since the output is a matrix
+#' @param type The output type, in this case it defaults to "raw" since the output is a matrix or "class" to get the final predicted classes.
 #' @param ... Additional arguments
 #' @return the transformed matrix
 #' @author Yuan Tang
@@ -157,13 +158,22 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
 predict.lfda <- function(object, newdata = NULL, type = "raw", ...){
 
   if(is.null(newdata)){stop("You must provide data to be used for transformation. ")}
-  if(type!="raw"){stop('Types other than "raw" are currently unavailable. ')}
   if(is.data.frame(newdata)) newdata <- as.matrix(newdata)
 
   transformMatrix <- object$T
 
   result <- newdata %*% transformMatrix
+  colnames(result) <- object$levels
+
+  if(type == "class"){
+    result <- apply(result, 1, which.max)
+    result <- object$levels[result]
+  } else if(type != 'raw'){
+    stop('Types other than "raw" and "class" are currently unavailable.')
+  }
+
   result
+
 }
 
 #' Print an lfda object
