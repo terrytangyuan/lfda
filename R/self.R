@@ -22,6 +22,7 @@
 #'               'orthonormalized' --- orthonormalized
 #'               'plain'           --- raw eigenvectors
 #' @param kNN parameter used in local scaling method (default: 5)
+#' @param minObsPerLabel the minimum number observations required for each different label(default: 5)
 #'
 #' @return list of the SELF results:
 #' \item{T}{d x r transformation matrix (Z = x * T)}
@@ -57,7 +58,12 @@
 #' Y <- iris[,5]
 #' result <- self(X,Y,beta = 0.1, r = 3, metric = "plain")
 #' }
-self <- function(X, Y, beta = 0.5, r, metric = c("orthonormalized","plain","weighted"), kNN = 5){
+self <- function(X, Y, beta = 0.5, r, metric = c("orthonormalized","plain","weighted"), kNN = 5, minObsPerLabel = 5){
+
+  if (any(table(Y) < minObsPerLabel)) {
+    stop(cat("Number of reviews per label is less than", minObsPerLabel, "\n",
+             "the label(s):", Y[which(table(Y) <= minObsPerLabel)], "is/are the problem(s)!"))
+  }
 
   X <- t(as.matrix(X))
   Y <- t(as.matrix(Y))

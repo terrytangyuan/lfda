@@ -6,7 +6,7 @@
 Semi-Supervised Dimensionality Reduction}
 \usage{
 self(X, Y, beta = 0.5, r, metric = c("orthonormalized", "plain",
-  "weighted"), kNN = 5)
+  "weighted"), kNN = 5, minObsPerLabel = 5)
 }
 \arguments{
 \item{X}{n x d matrix of original samples.
@@ -26,6 +26,8 @@ n is the number of samples.}
 'plain'           --- raw eigenvectors}
 
 \item{kNN}{parameter used in local scaling method (default: 5)}
+
+\item{minObsPerLabel}{the minimum number observations required for each different label(default: 5)}
 }
 \value{
 list of the SELF results:
