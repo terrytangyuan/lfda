@@ -40,4 +40,6 @@ test_that('exceptions are caught in visualization function', {
   expect_error(plot(result, iris[1:10,5]))
   expect_error(plot(result, iris[,5], cleanText=3))
   expect_that(plot(result, as.character(iris[,5])), not(throws_error()))
+  expect_warning(plot(lfda(k,y,4,metric="plain"), y))
+  expect_error(plot(lfda(k,y,2,metric="plain"), y))
 })
