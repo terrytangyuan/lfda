@@ -20,6 +20,15 @@ test_that('lfda visualization works', {
   expect_that(plot(result, iris[,5]), not(throws_error()))
 })
 
+test_that('self visualization works', {
+  X <- iris[,-5]
+  Y <- iris[,5]
+  r <- 3
+  result <- self(X,Y,beta = 0.1, r = 3, metric = "plain")
+  options(rgl.useNULL=TRUE) # deal with rgl in Travis
+  expect_that(plot(result, iris[,5]), not(throws_error()))
+})
+
 test_that('exceptions are caught in visualization function', {
   k <- iris[,-5]
   y <- iris[,5]
