@@ -12,7 +12,7 @@ matrix that can be used for transforming testing set}
 
 \item{newdata}{The data to be transformed}
 
-\item{type}{The output type, in this case it defaults to "raw" since the output is a matrix}
+\item{type}{The output type, in this case it defaults to "raw" since the output is a matrix, "class" to get the final predicted classes or "probs" to get predicted class probs.}
 
 \item{...}{Additional arguments}
 }

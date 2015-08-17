@@ -93,7 +93,8 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
   tSw <- mat.or.vec(d, d) # initialize within-class scatter matrix (to be minimized)
 
   # compute the optimal scatter matrices in a classwise manner
-  for (i in unique(as.vector(t(y)))) {
+  y_levels <- sort(unique(as.vector(t(y))))
+  for (i in y_levels) {
 
     Xc <- x[, y == i] # data for this class
     nc <- ncol(Xc)
@@ -138,7 +139,7 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
   Tr <- getMetricOfType(metric, eigVec, eigVal, d)
 
   Z <- t(t(Tr) %*% x) # transformed data
-  out <- list("T" = Tr, "Z" = Z)
+  out <- list("T" = Tr, "Z" = Z, levels=y_levels)
   class(out) <- 'lfda'
   return(out)
 }
@@ -148,22 +149,44 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
 #' @param object The result from lfda function, which contains a transformed data and a transforming
 #'        matrix that can be used for transforming testing set
 #' @param newdata The data to be transformed
-#' @param type The output type, in this case it defaults to "raw" since the output is a matrix
+#' @param type The output type, in this case it defaults to "raw" since the output is a matrix, "class" to get the final predicted classes or "probs" to get predicted class probs.
 #' @param ... Additional arguments
 #' @return the transformed matrix
 #' @author Yuan Tang
+#' @export
+#' @method predict lfda
 predict.lfda <- function(object, newdata = NULL, type = "raw", ...){
 
   if(is.null(newdata)){stop("You must provide data to be used for transformation. ")}
-  if(type!="raw"){stop('Types other than "raw" are currently unavailable. ')}
   if(is.data.frame(newdata)) newdata <- as.matrix(newdata)
 
   transformMatrix <- object$T
 
   result <- newdata %*% transformMatrix
-  result
+
+  if(type ==  'raw'){
+    return(result)
+  } else if(type == 'prob'){
+    result <- result[,-1]
+    colnames(result) <- object$levels
+    return(result)
+  }else if(type == "class"){
+    result <- result[,-1]
+    result <- apply(result, 1, which.max)
+    result <- object$levels[result]
+    return(result)
+  } else if(type != 'raw'){
+    stop('Types other than "raw", "class", and "probs" are currently unavailable.')
+  }
 }
 
+#' Print an lfda object
+#'
+#' Print an lfda object
+#' @param x The result from lfda function, which contains a transformed data and a transforming
+#' @param ... ignored
+#' @export
+#' @method print lfda
 print.lfda <- function(x, ...){
   cat("Results for Local Fisher Discriminant Analysis \n\n")
   cat("The trained transforming matric is: \n")
