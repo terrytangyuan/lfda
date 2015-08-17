@@ -2,6 +2,9 @@
 #' Semi-Supervised Dimensionality Reduction
 #'
 #' Performs semi-supervised local fisher discriminant analysis (SELF) on the given data.
+#' SELF is a linear semi-supervised dimensionality reduction method smoothly bridges supervised
+#' LFDA and unsupervised principal component analysis, by which a natural regularization effect
+#' can be obtained when only a small number of labeled samples are available.
 #'
 #' @import rARPACK
 #'
@@ -66,7 +69,7 @@ self <- function(X, Y, beta = 0.5, r, metric = c("orthonormalized","plain","weig
   tSb <- mat.or.vec(d, d)
   tSw <- mat.or.vec(d, d)
 
-  flag_label <- (Y != 0)
+  flag_label <- !is.na(Y)
   nlabel=sum(flag_label);
   X2 <- t(as.matrix(colSums(X^2)))
   # correct in lfda: dist2=repmat(X2, nlabel, 1) + repmat(t(X2), 1, nlabel) - 2 * t(X) %*% X
