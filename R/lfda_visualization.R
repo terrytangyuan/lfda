@@ -41,6 +41,11 @@ plot.lfda <- function(x, labels, cleanText=FALSE, ...){
 
   if(!is.logical(cleanText)){stop("cleanText needs to be TRUE(T) or FALSE(F).")}
 
+  if(dim(x$Z)[2] > 3){
+    x$Z <- x$Z[, 1:3]
+    warning("dimensionality of the transformed data is larger than 3. Only the first 3 columns of the data will be used. ")
+  } else if(dim(x$Z)[2] < 3){stop("dimensionality of the transformed data must be larger than 3.")}
+
   transformedData <- as.data.frame(cbind(labels, x$Z))
   colnames(transformedData)[1] <- "Class"
 

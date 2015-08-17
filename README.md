@@ -16,3 +16,42 @@ install.packages('lfda')
 ```{R}
 devtools::install_github('terrytangyuan/lfda')
 ```
+
+## Examples
+### Local Fisher Discriminant Analysis(LFDA)
+Suppose we want to reduce the dimensionality of the original data set (we are using `iris` data set here) to 3, then we can run the following:
+```
+k <- iris[,-5] # this matrix contains all the predictors to be transformed
+y <- iris[,5] # this should be a vector that represents different classes
+r <- 3 # dimensionality of the resulting matrix
+
+# run the model, note that two other kinds metrics we can use: 'weighted' and 'orthonormalized'
+model <- lfda(k,y,r,metric="plain") 
+
+plot(model, y) # 3D visualization of the resulting transformed data set
+
+predict(model, iris[,-5]) # transform new data set using predict
+
+```
+### Kernel Local Fisher Discriminant Analysis(KLFDA)
+The main usage is the same except for an additional `kmatrixGauss` call to the original data set to perform a kernel trick: 
+```
+k <- kmatrixGauss(iris[,-5])
+y <- iris[,5]
+r <- 3
+model <- klfda(k,y,r,metric="plain")
+
+```
+Note that the `predict` method for klfda is still under development. 
+
+### Semi-supervised Local Fisher Discriminant Analysis(SELF)
+This algorithm requires one additional argument such as `beta` that represents the degree of semi-supervisedness. Let's assume we ignore 10% of the labels in `iris` data set:
+```
+X <- iris[,-5]
+Y <- iris[,5]
+r <- 3
+  
+self(X,Y,beta = 0.1, r = 3, metric = "plain")
+
+```
+
