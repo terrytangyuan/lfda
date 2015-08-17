@@ -31,8 +31,8 @@
 #'
 #' @author Yuan Tang
 #'
-#' @seealso See \code{\link{klfda}} for the kernelized variant of
-#'          LFDA (Kernel LFDA) and LFDA \code{\link{lfda}}
+#' @seealso See \code{\link{lfda}} for LFDA and  \code{\link{klfda}} for the kernelized variant of
+#'          LFDA (Kernel LFDA).
 #'
 #' @references
 #' Sugiyama, Masashi, et al (2010).

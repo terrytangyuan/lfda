@@ -34,6 +34,9 @@ list of the SELF results:
 }
 \description{
 Performs semi-supervised local fisher discriminant analysis (SELF) on the given data.
+SELF is a linear semi-supervised dimensionality reduction method smoothly bridges supervised
+LFDA and unsupervised principal component analysis, by which a natural regularization effect
+can be obtained when only a small number of labeled samples are available.
 }
 \examples{
 \dontrun{
@@ -61,8 +64,8 @@ In W. W. Cohen and A. Moore (Eds.), \emph{Proceedings of 23rd International
 Conference on Machine Learning (ICML2006)}, 905--912.
 }
 \seealso{
-See \code{\link{klfda}} for the kernelized variant of
-         LFDA (Kernel LFDA) and LFDA \code{\link{lfda}}
+See \code{\link{lfda}} for LFDA and  \code{\link{klfda}} for the kernelized variant of
+         LFDA (Kernel LFDA).
 }
 \keyword{discriminant}
 \keyword{fisher}
