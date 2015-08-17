@@ -7,9 +7,9 @@
 #'
 #' @export  self
 #'
-#' @param x n x d matrix of original samples.
+#' @param X n x d matrix of original samples.
 #'          n is the number of samples.
-#' @param y length n vector of class labels
+#' @param Y length n vector of class labels
 #' @param beta degree of semi-supervisedness (0 <= beta <= 1; default is 0.5 )
 #'        0: totally supervised (discard all unlabeled samples)
 #'        1: totally unsupervised (discard all label information)

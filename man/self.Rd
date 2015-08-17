@@ -9,6 +9,11 @@ self(X, Y, beta = 0.5, r, metric = c("orthonormalized", "plain",
   "weighted"), kNN = 5)
 }
 \arguments{
+\item{X}{n x d matrix of original samples.
+n is the number of samples.}
+
+\item{Y}{length n vector of class labels}
+
 \item{beta}{degree of semi-supervisedness (0 <= beta <= 1; default is 0.5 )
 0: totally supervised (discard all unlabeled samples)
 1: totally unsupervised (discard all label information)}
@@ -21,11 +26,6 @@ self(X, Y, beta = 0.5, r, metric = c("orthonormalized", "plain",
 'plain'           --- raw eigenvectors}
 
 \item{kNN}{parameter used in local scaling method (default: 5)}
-
-\item{x}{n x d matrix of original samples.
-n is the number of samples.}
-
-\item{y}{length n vector of class labels}
 }
 \value{
 list of the SELF results:
