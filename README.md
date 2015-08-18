@@ -26,7 +26,7 @@ y <- iris[,5] # this should be a vector that represents different classes
 r <- 3 # dimensionality of the resulting matrix
 
 # run the model, note that two other kinds metrics we can use: 'weighted' and 'orthonormalized'
-model <- lfda(k,y,r,metric="plain") 
+model <- lfda(k, y, r, metric = "plain") 
 
 plot(model, y) # 3D visualization of the resulting transformed data set
 
@@ -39,19 +39,18 @@ The main usage is the same except for an additional `kmatrixGauss` call to the o
 k <- kmatrixGauss(iris[,-5])
 y <- iris[,5]
 r <- 3
-model <- klfda(k,y,r,metric="plain")
+model <- klfda(k, y, r, metric = "plain")
 
 ```
-Note that the `predict` method for klfda is still under development. 
+Note that the `predict` method for klfda is still under development. The `plot` method works the same way as in `lfda`.
 
 ### Semi-supervised Local Fisher Discriminant Analysis(SELF)
 This algorithm requires one additional argument such as `beta` that represents the degree of semi-supervisedness. Let's assume we ignore 10% of the labels in `iris` data set:
 ```{R}
-X <- iris[,-5]
-Y <- iris[,5]
+k <- iris[,-5]
+y <- iris[,5]
 r <- 3
-  
-self(X,Y,beta = 0.1, r = 3, metric = "plain")
+model <- self(k, y, beta = 0.1, r = 3, metric = "plain")
 
 ```
 The methods `predict` and `plot` work the same way as in `lfda`. 
