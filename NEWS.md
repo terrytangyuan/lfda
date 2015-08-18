@@ -1,4 +1,4 @@
-# Changes on Github Development Version Since Last Release
+# lfda 1.1.0
 * Added predict method for lfda so that the resulting transforming matrix can be easily applied to new data. 
 * Added Semi-supervised Local Fisher Discriminant Analysis. 
 
