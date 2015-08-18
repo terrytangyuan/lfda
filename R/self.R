@@ -78,17 +78,9 @@ self <- function(X, Y, beta = 0.5, r, metric = c("orthonormalized","plain","weig
   flag_label <- !is.na(Y)
   nlabel=sum(flag_label);
   X2 <- t(as.matrix(colSums(X^2)))
-  # correct in lfda: dist2=repmat(X2, nlabel, 1) + repmat(t(X2), 1, nlabel) - 2 * t(X) %*% X
-  dist2=abs(repmat(X2[,flag_label], 1, nlabel) + repmat(t(X2), 1, nlabel) - 2 * t(X) %*% X[,flag_label]) # modified
-  # A <- getAffinityMatrix(dist2, kNN, nlabel) # should also work - TODO: refactor
-  sorted <- apply(dist2, 2, sort, decreasing=TRUE) # modified
-  kNNdist2 <- t(as.matrix(sorted[kNN + 1, ]))
-  localscale=sqrt(kNNdist2)
-  LocalScale=t(localscale)%*%localscale
-  flag <- (LocalScale > 0)
-  A <- mat.or.vec(nlabel, nlabel)
-  dist2tmp=dist2[flag_label,]
-  A[flag] <- exp(-dist2tmp[flag]/LocalScale[flag])
+  disttmp <- (repmat(X2[,flag_label], 1, nlabel) + repmat(t(X2), 1, nlabel) - 2 * t(X) %*% X[,flag_label]) # modified
+  dist2 <- disttmp + abs(min(disttmp)) # modified
+  A <- getAffinityMatrix(dist2, kNN, nlabel)
 
   Wlb <- mat.or.vec(nlabel, nlabel)
   Wlw <- mat.or.vec(nlabel, nlabel)
