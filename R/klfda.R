@@ -78,50 +78,50 @@
 klfda <- function (k, y, r, metric = c('weighted', 'orthonormalized', 'plain'),
                    knn = 6, reg = 0.001) {
 
-	metric = match.arg(metric) # the type of the transforming matrix (metric)
-	y = t(as.matrix(y)) # transpose of original class labels
-	n = nrow(k) # number of samples
-	if(is.null(r)) r = n # if no dimension reduction requested, set r to n
+	metric <- match.arg(metric) # the type of the transforming matrix (metric)
+	y <- t(as.matrix(y)) # transpose of original class labels
+	n <- nrow(k) # number of samples
+	if(is.null(r)) r <- n # if no dimension reduction requested, set r to n
 
-	tSb = mat.or.vec(n, n) # initialize between-class scatter matrix (to be maximized)
-	tSw = mat.or.vec(n, n) # initialize within-class scatter matrix (to be minimized)
+	tSb <- mat.or.vec(n, n) # initialize between-class scatter matrix (to be maximized)
+	tSw <- mat.or.vec(n, n) # initialize within-class scatter matrix (to be minimized)
 
 	# compute the optimal scatter matrices in a classwise manner
 	for (i in unique(as.vector(t(y)))) {
 
-		Kcc = k[y == i, y == i] # data for this class
-		Kc = k[, y == i]
-		nc = nrow(Kcc)
+		Kcc <- k[y == i, y == i] # data for this class
+		Kc <- k[, y == i]
+		nc <- nrow(Kcc)
 
 		# Define classwise affinity matrix
-		Kccdiag = diag(Kcc) # diagonals of the class-specific data
-		distance2 = repmat(Kccdiag, 1, nc) + repmat(t(Kccdiag), nc, 1) - 2 * Kcc
+		Kccdiag <- diag(Kcc) # diagonals of the class-specific data
+		distance2 <- repmat(Kccdiag, 1, nc) + repmat(t(Kccdiag), nc, 1) - 2 * Kcc
 
 		# Get affinity matrix
 		A <- getAffinityMatrix(distance2, knn, nc)
 
-		Kc1 = as.matrix(rowSums(Kc))
-		Z = Kc %*% (repmat(as.matrix(colSums(A)), 1, n) * t(Kc)) - Kc %*% A %*% t(Kc)
-		tSb = tSb + (Z/n) + Kc %*% t(Kc) * (1 - nc/n) + Kc1 %*% (t(Kc1)/n)
-		tSw = tSw + Z/nc
+		Kc1 <- as.matrix(rowSums(Kc))
+		Z <- Kc %*% (repmat(as.matrix(colSums(A)), 1, n) * t(Kc)) - Kc %*% A %*% t(Kc)
+		tSb <- tSb + (Z/n) + Kc %*% t(Kc) * (1 - nc/n) + Kc1 %*% (t(Kc1)/n)
+		tSw <- tSw + Z/nc
 	}
 
-	K1 = as.matrix(rowSums(k))
-	tSb = tSb - K1 %*% t(K1)/n - tSw
+	K1 <- as.matrix(rowSums(k))
+	tSb <- tSb - K1 %*% t(K1)/n - tSw
 
-	tSb = (tSb + t(tSb))/2 # final between-class cluster matrix
-	tSw = (tSw + t(tSw))/2 # final within-class cluster matrix
+	tSb <- (tSb + t(tSb))/2 # final between-class cluster matrix
+	tSw <- (tSw + t(tSw))/2 # final within-class cluster matrix
 
 	# find generalized eigenvalues and normalized eigenvectors of the problem
 	eigTmp <- rARPACK::eigs(A=solve(tSw + reg * diag(1, nrow(tSw), ncol(tSw))) %*% tSb,k=r,which='LM') # r largest magnitude eigenvalues
-	eigVec = eigTmp$vectors # the raw transforming matrix
-	eigVal = as.matrix(eigTmp$values)
+	eigVec <- eigTmp$vectors # the raw transforming matrix
+	eigVal <- as.matrix(eigTmp$values)
 
 	# options to require a particular type of returned transform matrix
 	# transforming matrix (do not change the "=" in the switch statement)
 	Tr <- getMetricOfType(metric, eigVec, eigVal, n)
 
-	Z = t(t(Tr) %*% k) # transformed data
+	Z <- t(t(Tr) %*% k) # transformed data
 	out <- list("T" = Tr, "Z" = Z)
 	class(out) <- 'lfda'
 	return(out)

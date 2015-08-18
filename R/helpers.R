@@ -41,18 +41,18 @@ repmat <- function(A, N, M) {
 #'
 #' @return an affinity matrix - the larger the element in the matrix, the closer two data points are
 getAffinityMatrix <- function(distance2, knn, nc){
-  sorted = apply(distance2, 2, sort) # sort for each column by distance
-  kNNdist2 = t(as.matrix(sorted[knn + 1, ])) # knn-th nearest neighbor
-  sigma = sqrt(kNNdist2)
+  sorted <- apply(distance2, 2, sort) # sort for each column by distance
+  kNNdist2 <- t(as.matrix(sorted[knn + 1, ])) # knn-th nearest neighbor
+  sigma <- sqrt(kNNdist2)
 
-  localscale = t(sigma) %*% sigma
+  localscale <- t(sigma) %*% sigma
   # use only non-zero entries in localscale since this will be used in the denominator
   # to calculate the affinity matrix
-  flag = (localscale != 0)
+  flag <- (localscale != 0)
 
   # define affinity matrix - the larger the element in the matrix, the closer two data points are
-  A = mat.or.vec(nc, nc)
-  A[flag] = exp(-distance2[flag]/localscale[flag])
+  A <- mat.or.vec(nc, nc)
+  A[flag] <- exp(-distance2[flag]/localscale[flag])
   return(A)
 }
 #' Get Requested Type of Transforming Metric

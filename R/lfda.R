@@ -123,15 +123,12 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
   if (r == d) {
     # without dimensionality reduction
     eigTmp <- eigen(solve(tSw) %*% tSb)  # eigenvectors here are normalized
-    eigVec <- eigTmp$vectors
-    eigVal <- as.matrix(eigTmp$values)
-
   } else {
     # dimensionality reduction (select only the r largest eigenvalues of the problem)
     eigTmp <- rARPACK::eigs(A=solve(tSw) %*% tSb,k=r,which='LM') # r largest magnitude eigenvalues
-    eigVec <- eigTmp$vectors # the raw transforming matrix
-    eigVal <- as.matrix(eigTmp$values)
   }
+  eigVec <- eigTmp$vectors # the raw transforming matrix
+  eigVal <- as.matrix(eigTmp$values)
 
   # options to require a particular type of returned transform matrix
   # transforming matrix (do not change the "=" in the switch statement)
@@ -155,7 +152,7 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
 predict.lfda <- function(object, newdata = NULL, type = "raw", ...){
 
   if(is.null(newdata)){stop("You must provide data to be used for transformation. ")}
-  if(type!="raw"){stop('Types other than "raw" are currently unavailable. ')}
+  if(type != "raw"){stop('Types other than "raw" are currently unavailable. ')}
   if(is.data.frame(newdata)) newdata <- as.matrix(newdata)
 
   transformMatrix <- object$T
