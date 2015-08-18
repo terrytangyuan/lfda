@@ -168,6 +168,8 @@ predict.lfda <- function(object, newdata = NULL, type = "raw", ...){
 #' @param x The result from lfda function, which contains a transformed data and a transforming
 #' @param ... ignored
 #' @export
+#' @importFrom stats cov
+#' @importFrom utils head
 #' @method print lfda
 print.lfda <- function(x, ...){
   cat("Results for Local Fisher Discriminant Analysis \n\n")
