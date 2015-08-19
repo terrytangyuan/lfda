@@ -62,7 +62,7 @@ self <- function(X, Y, beta = 0.5, r, metric = c("orthonormalized","plain","weig
 
   if (any(table(Y) < minObsPerLabel)) {
     stop(cat("Number of reviews per label is less than", minObsPerLabel, "\n",
-             "the label(s):", Y[which(table(Y) <= minObsPerLabel)], "is/are the problem(s)!"))
+             "the label(s):", unique(Y[which(table(Y) <= minObsPerLabel)]), "is/are the problem(s)!"))
   }
 
   X <- t(as.matrix(X))
