@@ -42,6 +42,7 @@ repmat <- function(A, N, M) {
 #' @return an affinity matrix - the larger the element in the matrix, the closer two data points are
 getAffinityMatrix <- function(distance2, knn, nc){
   sorted <- apply(distance2, 2, sort) # sort for each column by distance
+  if(dim(sorted)[1] < knn + 1){stop("knn is too large, please try to reduce it.")}
   kNNdist2 <- t(as.matrix(sorted[knn + 1, ])) # knn-th nearest neighbor
   sigma <- sqrt(kNNdist2)
 
