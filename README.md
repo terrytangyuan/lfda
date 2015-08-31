@@ -57,7 +57,8 @@ model <- self(k, y, beta = 0.1, r = 3, metric = "plain")
 
 ```
 The methods `predict` and `plot` work the same way as in `lfda`. 
-
+### Integration with {ggplot2::autoplot}
+`{ggplot2::autoplot}` has been integrated with this package. Now `{lfda}` can be plotted in 2D easily and beautifully using `{ggfortify}` package. Go to [this link](http://rpubs.com/sinhrks/plot_pca) and scroll down to the last section for an example. 
 
 # lfda R包的使用方法以及算法的简要说明
 # 作者： 唐源（Yuan Tang）
