@@ -15,5 +15,6 @@ Imports:
     plyr,
     grDevices,
     rARPACK,
+Suggests: 
+    testthat,
     rgl
-Suggests: testthat
