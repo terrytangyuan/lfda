@@ -109,7 +109,7 @@ self <- function(X, Y, beta = 0.5, r, metric = c("orthonormalized","plain","weig
   if(r == d){
     eigTmp <- eigen(solve(Srlw) %*% Srlb)
   } else{
-    eigTmp <- suppressWarnings(rARPACK::eigs(A = solve(Srlw) %*% Srlb,k = r,which = 'LM'))
+    eigTmp <- suppressWarnings(rARPACK::eigs(A = Re(solve(Srlw) %*% Srlb),k = r,which = 'LM'))
   }
   eigVec <- eigTmp$vectors
   eigVal <- as.matrix(eigTmp$values)
