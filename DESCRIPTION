@@ -14,7 +14,7 @@ Depends:
 Imports:
     plyr,
     grDevices,
-    rARPACK,
-    rgl
+    rARPACK
 Suggests: 
-    testthat
+    testthat,
+    rgl

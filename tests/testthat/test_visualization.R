@@ -3,6 +3,8 @@ context('visualization')
 data(iris)
 
 test_that('klfda visualization works', {
+  skip_on_cran()
+  skip_if_not_installed("rgl")
   k <- kmatrixGauss(iris[,-5])
   y <- iris[,5]
   r <- 3
@@ -12,6 +14,8 @@ test_that('klfda visualization works', {
 })
 
 test_that('lfda visualization works', {
+  skip_on_cran()
+  skip_if_not_installed("rgl")
   k <- iris[,-5]
   y <- iris[,5]
   r <- 3
@@ -21,6 +25,8 @@ test_that('lfda visualization works', {
 })
 
 test_that('self visualization works', {
+  skip_on_cran()
+  skip_if_not_installed("rgl")
   X <- iris[,-5]
   Y <- iris[,5]
   r <- 3
@@ -30,6 +36,8 @@ test_that('self visualization works', {
 })
 
 test_that('exceptions are caught in visualization function', {
+  skip_on_cran()
+  skip_if_not_installed("rgl")
   k <- iris[,-5]
   y <- iris[,5]
   r <- 3

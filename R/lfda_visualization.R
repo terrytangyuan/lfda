@@ -23,8 +23,6 @@ Cols <- function(vec){
 #' @param cleanText A boolean value to specify whether to make the labels in the plot cleaner (default: FALSE)
 #' @param ... Additional arguments
 #'
-#' @import rgl
-#'
 #' @method plot lfda
 #' @export
 #'
