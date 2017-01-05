@@ -1,10 +1,22 @@
-# lfda 1.1.1
+lfda 1.1.2
+---------------------
+
+* White paper has been uploaded to arXiv [here](https://arxiv.org/abs/1612.09219). Use `citation("lfda")` for more information.
+* A couple of small warnings and fixes.
+
+lfda 1.1.1
+---------------------
+
 * `ggfortify` package has integrated with `lfda`. Now it's easy to visualize `lfda`, `klfda`, and `self` in 2D with the help of  `ggplot2` and `ggfortify`.
 * Move rgl to be suggested package to avoid installation problems due to rgl on mac. 
 
-# lfda 1.1.0
+lfda 1.1.0
+---------------------
+
 * Added predict method for lfda so that the resulting transforming matrix can be easily applied to new data. 
 * Added Semi-supervised Local Fisher Discriminant Analysis. 
 
-# lfda 1.0.0 - First Release on CRAN
+lfda 1.0.0
+---------------------
+
 * R package for performing and visualizing *Local Fisher Discriminant Analysis*, and *Kernel Local Fisher Discriminant Analysis*.

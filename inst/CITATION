@@ -1,0 +1,18 @@
+citHeader("To cite lfda in publications, please use:")
+
+citEntry(entry = "article",
+  author = "Tang, Yuan and Li, Wenxuan",
+  title = "lfda: An R Package for Local Fisher Discriminant Analysis and Visualization",
+  journal = "arXiv preprint arXiv:1612.09219",
+  year = "2016",
+  url = "https://arxiv.org/abs/1612.09219",
+  textVersion = "Tang, Yuan, and Wenxuan Li. lfda: An R Package for Local Fisher Discriminant Analysis and Visualization. arXiv preprint arXiv:1612.09219 (2016)."
+)
+
+citEntry(entry = "manual",
+  author = "Yuan Tang",
+  title = "Local Fisher Discriminant Analysis",
+  year = "2017",
+  url = "https://CRAN.R-project.org/package=lfda",
+  textVersion = "Yuan Tang (2017). Local Fisher Discriminant Analysis. https://CRAN.R-project.org/package=lfda"
+)

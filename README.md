@@ -20,6 +20,10 @@ install.packages('lfda')
 devtools::install_github('terrytangyuan/lfda')
 ```
 
+## Citation
+
+Please call `citation("lfda")` in R to properly cite this software. A white paper is available [here](https://arxiv.org/abs/1612.09219). 
+
 ## Examples
 ### Local Fisher Discriminant Analysis(LFDA)
 Suppose we want to reduce the dimensionality of the original data set (we are using `iris` data set here) to 3, then we can run the following:

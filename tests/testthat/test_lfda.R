@@ -6,18 +6,18 @@ test_that('lfda works', {
   k <- iris[,-5]
   y <- iris[,5]
   r <- 3
-  expect_that(lfda(k,y,r,metric="plain"), not(throws_error()))
-  expect_that(lfda(k,y,r,metric="weighted"), not(throws_error()))
-  expect_that(lfda(k,y,r,metric="orthonormalized"), not(throws_error()))
+  lfda(k,y,r,metric="plain")
+  lfda(k,y,r,metric="weighted")
+  lfda(k,y,r,metric="orthonormalized")
 
   expect_error(lfda(k,y,r,metric="plain", knn=10000))
 
   # case when r=d
-  expect_that(lfda(k,y,r=4,metric="plain"), not(throws_error()))
+  lfda(k,y,r=4,metric="plain")
 
   model <- lfda(k,y,r=4,metric="plain")
-  expect_that(predict(model, iris[,-5]), not(throws_error()))
+  predict(model, iris[,-5])
   expect_error(predict(model, iris[,-5], "wrongType"))
   expect_error(predict(model))
-  expect_that(capture.output(print(model)), not(throws_error())) # suppress printing
+  capture.output(print(model))
 })

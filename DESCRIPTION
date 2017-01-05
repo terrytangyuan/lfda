@@ -1,20 +1,23 @@
 Package: lfda
 Type: Package
 Title: Local Fisher Discriminant Analysis
-Version: 1.1.1.9999
-Date: 2016-02-03
-Author: Yuan Tang <terrytangyuan@gmail.com> and Zachary Deane-Mayer with contributions from Nan Xiao.
+Version: 1.1.2
+Date: 2017-01-05
+Author: Yuan Tang. Contributions from Nan Xiao and Zachary Deane-Mayer.
 URL: https://github.com/terrytangyuan/lfda
 BugReports: https://github.com/terrytangyuan/lfda/issues
 Maintainer: Yuan Tang <terrytangyuan@gmail.com>
 License: MIT + file LICENSE
-Description: Functions for performing and visualizing Local Fisher Discriminant Analysis(LFDA), Kernel Fisher Discriminant Analysis(KLFDA), and Semi-supervised Local Fisher Discriminant Analysis(SELF).
+Description: Functions for performing and visualizing Local Fisher Discriminant
+    Analysis(LFDA), Kernel Fisher Discriminant Analysis(KLFDA), and Semi-supervised
+    Local Fisher Discriminant Analysis(SELF).
 Depends:
     R (>= 3.1.0)
 Imports:
     plyr,
     grDevices,
     rARPACK
-Suggests: 
+Suggests:
     testthat,
     rgl
+RoxygenNote: 5.0.1
