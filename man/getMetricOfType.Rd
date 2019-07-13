@@ -21,4 +21,3 @@ The transformation metric in requested type
 \description{
 This function returns the requested type of transforming metric.
 }
-

@@ -18,4 +18,3 @@ the matrix after negative one half power
 This function defines operation for negative one half matrix
 power operator
 }
-

@@ -5,8 +5,8 @@
 \title{Kernel Local Fisher Discriminant Analysis for
 Supervised Dimensionality Reduction}
 \usage{
-klfda(k, y, r, metric = c("weighted", "orthonormalized", "plain"), knn = 6,
-  reg = 0.001)
+klfda(k, y, r, metric = c("weighted", "orthonormalized", "plain"),
+  knn = 6, reg = 0.001)
 }
 \arguments{
 \item{k}{n x n kernel matrix. Result of the \code{\link{kmatrixGauss}} function.
@@ -66,9 +66,6 @@ colnames(metric.test)[1] <- "Style"
 }
 
 }
-\author{
-Yuan Tang
-}
 \references{
 Sugiyama, M (2007). - contain implementation
 Dimensionality reduction of multimodal labeled data by
@@ -85,6 +82,9 @@ Original Matlab Implementation: http://www.ms.k.u-tokyo.ac.jp/software.html#LFDA
 \seealso{
 See \code{\link{lfda}} for the linear version.
 }
+\author{
+Yuan Tang
+}
 \keyword{discriminant}
 \keyword{fisher}
 \keyword{klfda}
@@ -92,4 +92,3 @@ See \code{\link{lfda}} for the linear version.
 \keyword{mahalanobis}
 \keyword{metric}
 \keyword{transformation}
-

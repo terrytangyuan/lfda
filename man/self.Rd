@@ -47,9 +47,6 @@ Y <- iris[,5]
 result <- self(X,Y,beta = 0.1, r = 3, metric = "plain")
 }
 }
-\author{
-Yuan Tang
-}
 \references{
 Sugiyama, Masashi, et al (2010).
 Semi-supervised local Fisher discriminant analysis for dimensionality reduction.
@@ -69,6 +66,9 @@ Conference on Machine Learning (ICML2006)}, 905--912.
 See \code{\link{lfda}} for LFDA and  \code{\link{klfda}} for the kernelized variant of
          LFDA (Kernel LFDA).
 }
+\author{
+Yuan Tang
+}
 \keyword{discriminant}
 \keyword{fisher}
 \keyword{lfda}
@@ -77,4 +77,3 @@ See \code{\link{lfda}} for LFDA and  \code{\link{klfda}} for the kernelized vari
 \keyword{metric}
 \keyword{semi-supervised}
 \keyword{transformation}
-

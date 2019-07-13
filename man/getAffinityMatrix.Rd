@@ -19,4 +19,3 @@ an affinity matrix - the larger the element in the matrix, the closer two data p
 \description{
 This function returns an affinity matrix within knn-nearest neighbors from the distance matrix.
 }
-

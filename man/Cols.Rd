@@ -15,4 +15,3 @@ The colors for each element in the given vector
 \description{
 This function assigns a color to each distinct value in the given vector.
 }
-

@@ -20,4 +20,3 @@ matrix consisting of an N-by-M tiling copies of A
 This function mimics the behavior and syntax of repmat() in Matlab
 it generates a large matrix consisting of an N-by-M tiling copies of A
 }
-

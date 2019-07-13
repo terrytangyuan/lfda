@@ -21,4 +21,3 @@ This function plot 3 dimensions of the lfda/klfda result.
 \seealso{
 See \code{\link{lfda}} and \code{\link{klfda}} for the metric learning method used for this visualization.
 }
-

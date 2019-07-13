@@ -5,7 +5,8 @@
 \title{Local Fisher Discriminant Analysis for
 Supervised Dimensionality Reduction}
 \usage{
-lfda(x, y, r, metric = c("orthonormalized", "plain", "weighted"), knn = 5)
+lfda(x, y, r, metric = c("orthonormalized", "plain", "weighted"),
+  knn = 5)
 }
 \arguments{
 \item{x}{n x d matrix of original samples.
@@ -71,9 +72,6 @@ colnames(metric.test)[1] <- "Style"
 
 
 }
-\author{
-Yuan Tang
-}
 \references{
 Sugiyama, M (2007).
 Dimensionality reduction of multimodal labeled data by
@@ -89,6 +87,9 @@ Conference on Machine Learning (ICML2006)}, 905--912.
 See \code{\link{klfda}} for the kernelized variant of
          LFDA (Kernel LFDA).
 }
+\author{
+Yuan Tang
+}
 \keyword{discriminant}
 \keyword{fisher}
 \keyword{lfda}
@@ -96,4 +97,3 @@ See \code{\link{klfda}} for the kernelized variant of
 \keyword{mahalanobis}
 \keyword{metric}
 \keyword{transformation}
-

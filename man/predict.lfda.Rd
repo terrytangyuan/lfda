@@ -25,4 +25,3 @@ This function transforms a data set, usually a testing set, using the trained LF
 \author{
 Yuan Tang
 }
-

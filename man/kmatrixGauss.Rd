@@ -27,9 +27,6 @@ k <- kmatrixGauss(x = train.data)
 }
 
 }
-\author{
-Yuan Tang
-}
 \references{
 Sugiyama, M (2007).
 Dimensionality reduction of multimodal labeled data by
@@ -47,6 +44,9 @@ https://shapeofdata.wordpress.com/2013/07/23/gaussian-kernels/
 See \code{klfda} for the computation of
          kernel local fisher discriminant analysis
 }
+\author{
+Yuan Tang
+}
 \keyword{discriminant}
 \keyword{fisher}
 \keyword{kernel}
@@ -55,4 +55,3 @@ See \code{klfda} for the computation of
 \keyword{mahalanobis}
 \keyword{metric}
 \keyword{transformation}
-
