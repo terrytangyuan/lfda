@@ -50,37 +50,13 @@
 #' @import rARPACK
 #'
 #' @examples
-#' \dontrun{
-#' ## example without dimension reduction
-#' k <- trainData[,-1]
-#' y <- trainData[,1]
-#' r <- 26 # dimensionality of reduced space. Here no dimension reduction is performed
-#' result <- lfda(k,y,r,metric="plain")
-#' transformedMat <- result$Z # transformed training data
-#' metric.train <- as.data.frame(cbind(trainData[,1],transformedMat))
-#' colnames(metric.train)=colnames(trainData)
+#' 
+#' k <- iris[,-5]
+#' y <- iris[,5]
+#' r <- 3
+#' lfda(k, y, r, metric = "plain")
 #'
-#' ## example with dimension reduction
-#' k <- trainData[,-1]
-#' y <- trainData[,1]
-#' r <- 3 # dimensionality of reduced space
-#'
-#' result <- lfda(k,y,r,metric="weighted")
-#' transformMat  <- result$T # transforming matrix - distance metric
-#'
-#' # transformed training data with Style
-#' transformedMat <- result$Z # transformed training data
-#' metric.train <- as.data.frame(cbind(trainData[,1],transformedMat))
-#' colnames(metric.train)[1] <- "Style"
-#'
-#' # transformed testing data with Style
-#' metric.test <- as.matrix(testData[,-1]) %*% transformMat
-#' metric.test <- as.data.frame(cbind(testData[,1],metric.test))
-#' colnames(metric.test)[1] <- "Style"
-#' }
-#'
-#'
-lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn = 5) {
+lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"), knn = 5) {
 
   metric <- match.arg(metric) # the type of the transforming matrix (metric)
   x <- t(as.matrix(x)) # transpose of original samples
@@ -151,6 +127,15 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"),knn =
 #' @method predict lfda
 #' @return the transformed matrix
 #' @author Yuan Tang
+#' 
+#' @examples 
+#' 
+#' k <- iris[,-5]
+#' y <- iris[,5]
+#' r <- 3
+#' model <- lfda(k, y, r = 4,metric = "plain")
+#' predict(model, iris[,-5])
+#' 
 predict.lfda <- function(object, newdata = NULL, type = "raw", ...){
 
   if(is.null(newdata)){stop("You must provide data to be used for transformation. ")}

@@ -41,11 +41,11 @@ LFDA and unsupervised principal component analysis, by which a natural regulariz
 can be obtained when only a small number of labeled samples are available.
 }
 \examples{
-\dontrun{
-X <- iris[,-5]
-Y <- iris[,5]
-result <- self(X,Y,beta = 0.1, r = 3, metric = "plain")
-}
+
+x <- iris[,-5]
+y <- iris[,5]
+self(x, y, beta = 0.1, r = 3, metric = "plain")
+
 }
 \references{
 Sugiyama, Masashi, et al (2010).

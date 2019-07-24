@@ -45,35 +45,11 @@
 #' Original Matlab Implementation: http://www.ms.k.u-tokyo.ac.jp/software.html#LFDA
 #'
 #' @examples
-#' \dontrun{
-#' ## example without dimension reduction
-#' k <- kmatrixGauss(x = trainData[,-1])
-#' y <- trainData[,1]
-#' r <- 26 # dimensionality of reduced space. Here no dimension reduction is performed
-#' result <- klfda(k,y,r,metric="plain")
-#' transformedMat <- result$Z # transformed training data
-#' metric.train <- as.data.frame(cbind(trainData[,1],transformedMat))
-#' colnames(metric.train)=colnames(trainData)
-#'
-#' ## example with dimension reduction
-#' k <- kmatrixGauss(x = trainData[,-1])
-#' y <- trainData[,1]
-#' r <- 3 # dimensionality of reduced space
-#' result <- klfda(k,y,r,metric="plain")
-#' transformMat  <- result$T # transforming matrix - distance metric
-#'
-#' # transformed training data with Style
-#' transformedMat <- result$Z # transformed training data
-#' metric.train <- as.data.frame(cbind(trainData[,1],transformedMat))
-#' colnames(metric.train)[1] <- "Style"
-#'
-#' # transformed testing data with Style (unfinished)
-#' metric.test <- kmatrixGauss(x = testData[,-1])
-#' metric.test <- as.matrix(testData[,-1]) %*% transformMat
-#' metric.test <- as.data.frame(cbind(testData[,1],metric.test))
-#' colnames(metric.test)[1] <- "Style"
-#'
-#' }
+#' 
+#' k <- kmatrixGauss(iris[,-5])
+#' y <- iris[,5]
+#' r <- 3
+#' klfda(k, y, r, metric = "plain")
 #'
 klfda <- function (k, y, r, metric = c('weighted', 'orthonormalized', 'plain'),
                    knn = 6, reg = 0.001) {

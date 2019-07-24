@@ -37,10 +37,9 @@
 #' https://shapeofdata.wordpress.com/2013/07/23/gaussian-kernels/
 #' 
 #' @examples
-#' \dontrun{
-#' k <- kmatrixGauss(x = train.data)
-#' }
-#'
+#' 
+#' kmatrixGauss(iris[,-5])
+#' 
 kmatrixGauss <- function(x, sigma = 1) {
 	x = t(as.matrix(x))
 	d = nrow(x)

@@ -22,9 +22,8 @@ Gaussian kernel computation for klfda, which maps the original
 data space to non-linear and higher dimensions.
 }
 \examples{
-\dontrun{
-k <- kmatrixGauss(x = train.data)
-}
+
+kmatrixGauss(iris[,-5])
 
 }
 \references{

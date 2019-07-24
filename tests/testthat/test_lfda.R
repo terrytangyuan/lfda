@@ -31,7 +31,7 @@ test_that('S3 methods on produced lfda model have the correct behaviors', {
   y <- iris[,5]
   r <- 3
 
-  model <- lfda(k, y, r = 4,metric = "plain")
+  model <- lfda(k, y, r = 4, metric = "plain")
   expect_equal(dim(predict(model, iris[,-5])), c(150, 4))
   expect_error(predict(model, iris[,-5], "wrongType"))
   expect_error(predict(model))

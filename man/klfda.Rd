@@ -35,35 +35,11 @@ Performs kernel local fisher discriminant analysis on the given data,
 which is the non-linear version of LFDA (see details \code{\link{lfda}}).
 }
 \examples{
-\dontrun{
-## example without dimension reduction
-k <- kmatrixGauss(x = trainData[,-1])
-y <- trainData[,1]
-r <- 26 # dimensionality of reduced space. Here no dimension reduction is performed
-result <- klfda(k,y,r,metric="plain")
-transformedMat <- result$Z # transformed training data
-metric.train <- as.data.frame(cbind(trainData[,1],transformedMat))
-colnames(metric.train)=colnames(trainData)
 
-## example with dimension reduction
-k <- kmatrixGauss(x = trainData[,-1])
-y <- trainData[,1]
-r <- 3 # dimensionality of reduced space
-result <- klfda(k,y,r,metric="plain")
-transformMat  <- result$T # transforming matrix - distance metric
-
-# transformed training data with Style
-transformedMat <- result$Z # transformed training data
-metric.train <- as.data.frame(cbind(trainData[,1],transformedMat))
-colnames(metric.train)[1] <- "Style"
-
-# transformed testing data with Style (unfinished)
-metric.test <- kmatrixGauss(x = testData[,-1])
-metric.test <- as.matrix(testData[,-1]) \%*\% transformMat
-metric.test <- as.data.frame(cbind(testData[,1],metric.test))
-colnames(metric.test)[1] <- "Style"
-
-}
+k <- kmatrixGauss(iris[,-5])
+y <- iris[,5]
+r <- 3
+klfda(k, y, r, metric = "plain")
 
 }
 \references{

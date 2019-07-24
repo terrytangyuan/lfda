@@ -53,12 +53,12 @@
 #' @import rARPACK
 #'
 #' @examples
-#' \dontrun{
-#' X <- iris[,-5]
-#' Y <- iris[,5]
-#' result <- self(X,Y,beta = 0.1, r = 3, metric = "plain")
-#' }
-self <- function(X, Y, beta = 0.5, r, metric = c("orthonormalized","plain","weighted"), kNN = 5, minObsPerLabel = 5){
+#' 
+#' x <- iris[,-5]
+#' y <- iris[,5]
+#' self(x, y, beta = 0.1, r = 3, metric = "plain")
+#'
+self <- function(X, Y, beta = 0.5, r, metric = c("orthonormalized", "plain", "weighted"), kNN = 5, minObsPerLabel = 5){
 
   if (any(table(Y) < minObsPerLabel)) {
     stop(cat("Number of reviews per label is less than", minObsPerLabel, "\n",
