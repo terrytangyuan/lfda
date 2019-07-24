@@ -158,10 +158,10 @@ predict.lfda <- function(object, newdata = NULL, type = "raw", ...){
 #' @method print lfda
 print.lfda <- function(x, ...){
   cat("Results for Local Fisher Discriminant Analysis \n\n")
-  cat("The trained transforming matric is: \n")
+  cat("The trained transforming matrix is: \n")
   print(head(x$T))
 
-  cat("\n\n The original data set after applying this metric transformation is:  \n")
+  cat("\n\n The original dataset after applying this metric transformation is:  \n")
   print(head(x$Z))
 
   cat("\n")
