@@ -1,53 +1,53 @@
-context('Test visualization on different lfda models')
+context("Test visualization on different lfda models")
 
 data(iris)
 
-test_that('Visualization on klfda model works', {
+test_that("Visualization on klfda model works", {
   skip_on_cran()
   skip_if_not_installed("rgl")
-  k <- kmatrixGauss(iris[,-5])
-  y <- iris[,5]
+  k <- kmatrixGauss(iris[, -5])
+  y <- iris[, 5]
   r <- 3
   result <- klfda(k, y, r, metric = "plain")
   options(rgl.useNULL = TRUE) # deal with rgl in Travis
-  expect_silent(plot(result, iris[,5]))
+  expect_silent(plot(result, iris[, 5]))
 })
 
-test_that('Visualiztion on lfda model works', {
+test_that("Visualiztion on lfda model works", {
   skip_on_cran()
   skip_if_not_installed("rgl")
-  k <- iris[,-5]
-  y <- iris[,5]
+  k <- iris[, -5]
+  y <- iris[, 5]
   r <- 3
   result <- lfda(k, y, r, metric = "plain")
-  options(rgl.useNULL =TRUE) # deal with rgl in Travis
-  expect_silent(plot(result, iris[,5]))
+  options(rgl.useNULL = TRUE) # deal with rgl in Travis
+  expect_silent(plot(result, iris[, 5]))
 })
 
-test_that('Visualization on self model works', {
+test_that("Visualization on self model works", {
   skip_on_cran()
   skip_if_not_installed("rgl")
-  X <- iris[,-5]
-  Y <- iris[,5]
+  X <- iris[, -5]
+  Y <- iris[, 5]
   r <- 3
   result <- self(X, Y, beta = 0.1, r = 3, metric = "plain")
   options(rgl.useNULL = TRUE) # deal with rgl in Travis
-  expect_silent(plot(result, iris[,5]))
+  expect_silent(plot(result, iris[, 5]))
 })
 
-test_that('Exceptions are caught in visualization function', {
+test_that("Exceptions are caught in visualization function", {
   skip_on_cran()
   skip_if_not_installed("rgl")
-  k <- iris[,-5]
-  y <- iris[,5]
+  k <- iris[, -5]
+  y <- iris[, 5]
   r <- 3
   result <- lfda(k, y, r, metric = "plain")
-  options(rgl.useNULL=TRUE) # deal with rgl in Travis
-  plot(result, iris[,5], cleanText=TRUE)
-  expect_error(plot(result, iris[,1:5]))
-  expect_error(plot(result, iris[1:10,5]))
-  expect_error(plot(result, iris[,5], cleanText=3))
-  plot(result, as.character(iris[,5]))
-  expect_warning(plot(lfda(k, y, 4,metric = "plain"), y))
+  options(rgl.useNULL = TRUE) # deal with rgl in Travis
+  plot(result, iris[, 5], cleanText = TRUE)
+  expect_error(plot(result, iris[, 1:5]))
+  expect_error(plot(result, iris[1:10, 5]))
+  expect_error(plot(result, iris[, 5], cleanText = 3))
+  plot(result, as.character(iris[, 5]))
+  expect_warning(plot(lfda(k, y, 4, metric = "plain"), y))
   expect_error(plot(lfda(k, y, 2, metric = "plain"), y))
 })

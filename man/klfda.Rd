@@ -36,11 +36,10 @@ which is the non-linear version of LFDA (see details \code{\link{lfda}}).
 }
 \examples{
 
-k <- kmatrixGauss(iris[,-5])
-y <- iris[,5]
+k <- kmatrixGauss(iris[, -5])
+y <- iris[, 5]
 r <- 3
 klfda(k, y, r, metric = "plain")
-
 }
 \references{
 Sugiyama, M (2007). - contain implementation

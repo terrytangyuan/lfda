@@ -42,10 +42,9 @@ can be obtained when only a small number of labeled samples are available.
 }
 \examples{
 
-x <- iris[,-5]
-y <- iris[,5]
+x <- iris[, -5]
+y <- iris[, 5]
 self(x, y, beta = 0.1, r = 3, metric = "plain")
-
 }
 \references{
 Sugiyama, Masashi, et al (2010).

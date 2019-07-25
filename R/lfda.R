@@ -50,27 +50,24 @@
 #' @import rARPACK
 #'
 #' @examples
-#' 
-#' k <- iris[,-5]
-#' y <- iris[,5]
+#'
+#' k <- iris[, -5]
+#' y <- iris[, 5]
 #' r <- 3
 #' lfda(k, y, r, metric = "plain")
-#'
-lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"), knn = 5) {
-
+lfda <- function(x, y, r, metric = c("orthonormalized", "plain", "weighted"), knn = 5) {
   metric <- match.arg(metric) # the type of the transforming matrix (metric)
   x <- t(as.matrix(x)) # transpose of original samples
   y <- t(as.matrix(y)) # transpose of original class labels
   d <- nrow(x) # number of predictors
   n <- ncol(x) # number of samples
-  if(is.null(r)) r <- d # if no dimension reduction requested, set r to d
+  if (is.null(r)) r <- d # if no dimension reduction requested, set r to d
 
   tSb <- mat.or.vec(d, d) # initialize between-class scatter matrix (to be maximized)
   tSw <- mat.or.vec(d, d) # initialize within-class scatter matrix (to be minimized)
 
   # compute the optimal scatter matrices in a classwise manner
   for (i in unique(as.vector(t(y)))) {
-
     Xc <- x[, y == i] # data for this class
     nc <- ncol(Xc)
 
@@ -85,23 +82,23 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"), knn 
 
     Xc1 <- as.matrix(rowSums(Xc))
     G <- Xc %*% (repmat(as.matrix(colSums(A)), 1, d) * t(Xc)) - Xc %*% A %*% t(Xc)
-    tSb <- tSb + (G/n) + Xc %*% t(Xc) * (1 - nc/n) + Xc1 %*% (t(Xc1)/n)
-    tSw <- tSw + G/nc
+    tSb <- tSb + (G / n) + Xc %*% t(Xc) * (1 - nc / n) + Xc1 %*% (t(Xc1) / n)
+    tSw <- tSw + G / nc
   }
 
   X1 <- as.matrix(rowSums(x))
-  tSb <- tSb - X1 %*% t(X1)/n - tSw
+  tSb <- tSb - X1 %*% t(X1) / n - tSw
 
-  tSb <- (tSb + t(tSb))/2 # final between-class cluster matrix
-  tSw <- (tSw + t(tSw))/2 # final within-class cluster matrix
+  tSb <- (tSb + t(tSb)) / 2 # final between-class cluster matrix
+  tSw <- (tSw + t(tSw)) / 2 # final within-class cluster matrix
 
   # find generalized eigenvalues and normalized eigenvectors of the problem
   if (r == d) {
     # without dimensionality reduction
-    eigTmp <- eigen(solve(tSw) %*% tSb)  # eigenvectors here are normalized
+    eigTmp <- eigen(solve(tSw) %*% tSb) # eigenvectors here are normalized
   } else {
     # dimensionality reduction (select only the r largest eigenvalues of the problem)
-    eigTmp <- suppressWarnings(rARPACK::eigs(A = solve(tSw) %*% tSb, k = r, which = 'LM')) # r largest magnitude eigenvalues
+    eigTmp <- suppressWarnings(rARPACK::eigs(A = solve(tSw) %*% tSb, k = r, which = "LM")) # r largest magnitude eigenvalues
   }
   eigVec <- Re(eigTmp$vectors) # the raw transforming matrix
   eigVal <- as.matrix(Re(eigTmp$values))
@@ -112,7 +109,7 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"), knn 
 
   Z <- t(t(Tr) %*% x) # transformed data
   out <- list("T" = Tr, "Z" = Z)
-  class(out) <- 'lfda'
+  class(out) <- "lfda"
   return(out)
 }
 #' LFDA Transformation/Prediction on New Data
@@ -127,20 +124,22 @@ lfda <- function(x, y, r, metric = c("orthonormalized","plain","weighted"), knn 
 #' @method predict lfda
 #' @return the transformed matrix
 #' @author Yuan Tang
-#' 
-#' @examples 
-#' 
-#' k <- iris[,-5]
-#' y <- iris[,5]
+#'
+#' @examples
+#'
+#' k <- iris[, -5]
+#' y <- iris[, 5]
 #' r <- 3
-#' model <- lfda(k, y, r = 4,metric = "plain")
-#' predict(model, iris[,-5])
-#' 
-predict.lfda <- function(object, newdata = NULL, type = "raw", ...){
-
-  if(is.null(newdata)){stop("You must provide data to be used for transformation. ")}
-  if(type != "raw"){stop('Types other than "raw" are currently unavailable. ')}
-  if(is.data.frame(newdata)) newdata <- as.matrix(newdata)
+#' model <- lfda(k, y, r = 4, metric = "plain")
+#' predict(model, iris[, -5])
+predict.lfda <- function(object, newdata = NULL, type = "raw", ...) {
+  if (is.null(newdata)) {
+    stop("You must provide data to be used for transformation. ")
+  }
+  if (type != "raw") {
+    stop('Types other than "raw" are currently unavailable. ')
+  }
+  if (is.data.frame(newdata)) newdata <- as.matrix(newdata)
 
   transformMatrix <- object$T
 
@@ -156,7 +155,7 @@ predict.lfda <- function(object, newdata = NULL, type = "raw", ...){
 #' @importFrom stats cov
 #' @importFrom utils head
 #' @method print lfda
-print.lfda <- function(x, ...){
+print.lfda <- function(x, ...) {
   cat("Results for Local Fisher Discriminant Analysis \n\n")
   cat("The trained transforming matrix is: \n")
   print(head(x$T))

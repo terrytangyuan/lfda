@@ -42,11 +42,10 @@ be used if needed.
 }
 \examples{
 
-k <- iris[,-5]
-y <- iris[,5]
+k <- iris[, -5]
+y <- iris[, 5]
 r <- 3
 lfda(k, y, r, metric = "plain")
-
 }
 \references{
 Sugiyama, M (2007).

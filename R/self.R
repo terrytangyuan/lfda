@@ -53,16 +53,16 @@
 #' @import rARPACK
 #'
 #' @examples
-#' 
-#' x <- iris[,-5]
-#' y <- iris[,5]
-#' self(x, y, beta = 0.1, r = 3, metric = "plain")
 #'
-self <- function(X, Y, beta = 0.5, r, metric = c("orthonormalized", "plain", "weighted"), kNN = 5, minObsPerLabel = 5){
-
+#' x <- iris[, -5]
+#' y <- iris[, 5]
+#' self(x, y, beta = 0.1, r = 3, metric = "plain")
+self <- function(X, Y, beta = 0.5, r, metric = c("orthonormalized", "plain", "weighted"), kNN = 5, minObsPerLabel = 5) {
   if (any(table(Y) < minObsPerLabel)) {
-    stop(cat("Number of reviews per label is less than", minObsPerLabel, "\n",
-             "the label(s):", unique(Y[which(table(Y) <= minObsPerLabel)]), "is/are the problem(s)!"))
+    stop(cat(
+      "Number of reviews per label is less than", minObsPerLabel, "\n",
+      "the label(s):", unique(Y[which(table(Y) <= minObsPerLabel)]), "is/are the problem(s)!"
+    ))
   }
 
   X <- t(as.matrix(X))
@@ -70,15 +70,15 @@ self <- function(X, Y, beta = 0.5, r, metric = c("orthonormalized", "plain", "we
 
   d <- nrow(X) # number of predictors
   n <- ncol(X) # number of samples
-  if(is.null(r)) r <- d
+  if (is.null(r)) r <- d
 
   tSb <- mat.or.vec(d, d)
   tSw <- mat.or.vec(d, d)
 
   flag_label <- !is.na(Y)
-  nlabel <- sum(flag_label);
+  nlabel <- sum(flag_label)
   X2 <- t(as.matrix(colSums(X^2)))
-  disttmp <- (repmat(X2[,flag_label], 1, nlabel) + repmat(t(X2), 1, nlabel) - 2*t(X) %*% X[,flag_label]) # modified
+  disttmp <- (repmat(X2[, flag_label], 1, nlabel) + repmat(t(X2), 1, nlabel) - 2 * t(X) %*% X[, flag_label]) # modified
   dist2 <- disttmp + abs(min(disttmp)) # modified
   A <- getAffinityMatrix(dist2, kNN, nlabel)
 
@@ -86,30 +86,30 @@ self <- function(X, Y, beta = 0.5, r, metric = c("orthonormalized", "plain", "we
   Wlw <- mat.or.vec(nlabel, nlabel)
   Ylabel <- Y[flag_label]
 
-  for(class in Ylabel){
+  for (class in Ylabel) {
     flag_class <- (Ylabel == class)
     nclass <- sum(flag_class)
-    if(nclass != 0){
-      tmp <- flag_class*1
-      tmp2 <- (!flag_class)*1
-      Wlb <- Wlb + (A*(1/nlabel-1/nclass))*as.numeric(t(tmp)%*%tmp) + as.numeric(t(tmp)%*%tmp2)/nlabel
-      Wlw <- Wlw + (A/nclass)*as.numeric(t(tmp)%*%tmp)
+    if (nclass != 0) {
+      tmp <- flag_class * 1
+      tmp2 <- (!flag_class) * 1
+      Wlb <- Wlb + (A * (1 / nlabel - 1 / nclass)) * as.numeric(t(tmp) %*% tmp) + as.numeric(t(tmp) %*% tmp2) / nlabel
+      Wlw <- Wlw + (A / nclass) * as.numeric(t(tmp) %*% tmp)
     }
   }
 
-  Slb <- X[,flag_label] %*% (diag(t(as.matrix(colSums(Wlb)))) - Wlb) %*% t(X[,flag_label])
-  Slw <- X[,flag_label] %*% (diag(t(as.matrix(colSums(Wlw)))) - Wlw) %*% t(X[,flag_label])
+  Slb <- X[, flag_label] %*% (diag(t(as.matrix(colSums(Wlb)))) - Wlb) %*% t(X[, flag_label])
+  Slw <- X[, flag_label] %*% (diag(t(as.matrix(colSums(Wlw)))) - Wlw) %*% t(X[, flag_label])
 
-  Srlb <- (1 - beta)*Slb + beta*cov(t(X))/nrow(X)
-  Srlw <- (1 - beta)*Slw + beta*diag(d)
+  Srlb <- (1 - beta) * Slb + beta * cov(t(X)) / nrow(X)
+  Srlw <- (1 - beta) * Slw + beta * diag(d)
 
-  Srlb <- (Srlb + t(Srlb))/2
-  Srlw <- (Srlw + t(Srlw))/2
+  Srlb <- (Srlb + t(Srlb)) / 2
+  Srlw <- (Srlw + t(Srlw)) / 2
 
-  if(r == d){
+  if (r == d) {
     eigTmp <- eigen(solve(Srlw) %*% Srlb)
-  } else{
-    eigTmp <- suppressWarnings(rARPACK::eigs(A = solve(Srlw) %*% Srlb,k = r,which = 'LM'))
+  } else {
+    eigTmp <- suppressWarnings(rARPACK::eigs(A = solve(Srlw) %*% Srlb, k = r, which = "LM"))
   }
   eigVec <- Re(eigTmp$vectors)
   eigVal <- as.matrix(Re(eigTmp$values))
@@ -118,10 +118,6 @@ self <- function(X, Y, beta = 0.5, r, metric = c("orthonormalized", "plain", "we
 
   Z <- t(t(Tr) %*% X) # transformed data
   out <- list("T" = Tr, "Z" = Z)
-  class(out) <- 'lfda'
+  class(out) <- "lfda"
   return(out)
 }
-
-
-
-

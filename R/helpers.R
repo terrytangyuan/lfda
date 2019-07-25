@@ -12,7 +12,7 @@
 #' @export
 #'
 repmat <- function(A, N, M) {
-	kronecker(matrix(1, N, M), A)
+  kronecker(matrix(1, N, M), A)
 }
 #' Negative One Half Matrix Power Operator
 #'
@@ -27,7 +27,7 @@ repmat <- function(A, N, M) {
 #' @export
 #'
 "%^%" <- function(x, n) {
-		with(eigen(as.matrix(x)), vectors %*% (values^n * t(vectors)))
+  with(eigen(as.matrix(x)), vectors %*% (values^n * t(vectors)))
 }
 #' Get Affinity Matrix
 #'
@@ -40,9 +40,11 @@ repmat <- function(A, N, M) {
 #' @export
 #'
 #' @return an affinity matrix - the larger the element in the matrix, the closer two data points are
-getAffinityMatrix <- function(distance2, knn, nc){
+getAffinityMatrix <- function(distance2, knn, nc) {
   sorted <- apply(distance2, 2, sort) # sort for each column by distance
-  if(dim(sorted)[1] < knn + 1){stop("knn is too large, please try to reduce it.")}
+  if (dim(sorted)[1] < knn + 1) {
+    stop("knn is too large, please try to reduce it.")
+  }
   kNNdist2 <- t(as.matrix(sorted[knn + 1, ])) # knn-th nearest neighbor
   sigma <- sqrt(kNNdist2)
 
@@ -53,7 +55,7 @@ getAffinityMatrix <- function(distance2, knn, nc){
 
   # define affinity matrix - the larger the element in the matrix, the closer two data points are
   A <- mat.or.vec(nc, nc)
-  A[flag] <- exp(-distance2[flag]/localscale[flag])
+  A[flag] <- exp(-distance2[flag] / localscale[flag])
   return(A)
 }
 #' Get Requested Type of Transforming Metric
@@ -67,11 +69,11 @@ getAffinityMatrix <- function(distance2, knn, nc){
 #'
 #' @return The transformation metric in requested type
 #' @export
-getMetricOfType <- function(metric, eigVec, eigVal, total){
+getMetricOfType <- function(metric, eigVec, eigVal, total) {
   return(switch(metric,
-                # this weighting scheme is explained in section 3.3 in the first reference
-                weighted = eigVec * repmat(t(sqrt(eigVal)), total, 1),
-                orthonormalized = qr.Q(qr(eigVec)),
-                plain = eigVec
+    # this weighting scheme is explained in section 3.3 in the first reference
+    weighted = eigVec * repmat(t(sqrt(eigVal)), total, 1),
+    orthonormalized = qr.Q(qr(eigVec)),
+    plain = eigVec
   ))
 }
