@@ -3,6 +3,7 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/lfda)](https://cran.r-project.org/package=lfda)
 [![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/grand-total/lfda)](https://cran.r-project.org/package=lfda)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](http://badges.mit-license.org)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3352038.svg)](https://doi.org/10.5281/zenodo.3352038)
 
 # lfda
 R package for performing and visualizing *Local Fisher Discriminant Analysis*, *Kernel Local Fisher Discriminant Analysis*, and *Semi-supervised Local Fisher Discriminant Analysis*. It's the first package with those methods implemented in native R language. It also provides visualization functions to easily visualize the dimension reduction results.
