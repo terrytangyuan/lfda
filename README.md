@@ -69,7 +69,7 @@ The methods `predict` and `plot` work the same way as in `lfda`.
 
 ## Contribute & Code of Conduct
 
-To contribute to this project, please take a look at the [Contributing Guidelines](CONTRIBUTING.md) first. Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+To contribute to this project, please take a look at the [Contributing Guidelines](https://github.com/terrytangyuan/lfda/blob/master/CONTRIBUTING.md) first. Please note that this project is released with a [Contributor Code of Conduct](https://github.com/terrytangyuan/lfda/blob/master/CONDUCT.md). By contributing to this project, you agree to abide by its terms.
 
 ## Contact
 
