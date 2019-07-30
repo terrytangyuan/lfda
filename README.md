@@ -25,7 +25,7 @@ devtools::install_github('terrytangyuan/lfda')
 
 ## Citation
 
-Please call `citation("lfda")` in R to properly cite this software. A white paper is available on [arXiv](https://arxiv.org/abs/1612.09219). 
+Please call `citation("lfda")` in R to properly cite this software. A white paper is published on Journal of Open Source Software [here](http://joss.theoj.org/papers/10.21105/joss.01572). 
 
 ## Examples
 ### Local Fisher Discriminant Analysis(LFDA)
