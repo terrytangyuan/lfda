@@ -3,6 +3,7 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/lfda)](https://cran.r-project.org/package=lfda)
 [![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/grand-total/lfda)](https://cran.r-project.org/package=lfda)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](http://badges.mit-license.org)
+[![DOI](http://joss.theoj.org/papers/10.21105/joss.01572/status.svg)](https://doi.org/10.21105/joss.01572)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3352038.svg)](https://doi.org/10.5281/zenodo.3352038)
 
 # lfda
