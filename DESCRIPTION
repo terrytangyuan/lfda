@@ -9,8 +9,7 @@ Authors@R: c(
          comment = c(ORCID = "0000-0001-5243-233X")),
   person("Wenxuan", "Li", role = c("ctb")),
   person("Nan", "Xiao", role = c("ctb", "cph")),
-  person("Zachary", "Deane-Mayer", role = c("ctb"))
-)
+  person("Zachary", "Deane-Mayer", role = c("ctb")))
 URL: https://github.com/terrytangyuan/lfda
 BugReports: https://github.com/terrytangyuan/lfda/issues
 Maintainer: Yuan Tang <terrytangyuan@gmail.com>
