@@ -2,8 +2,15 @@ Package: lfda
 Type: Package
 Title: Local Fisher Discriminant Analysis
 Version: 1.1.3
-Date: 2019-07-26
-Author: Yuan Tang. Contributions from Wenxuan Li, Nan Xiao and Zachary Deane-Mayer.
+Date: 2019-07-31
+Authors@R: c(
+  person("Yuan", "Tang", role = c("aut", "cre"),
+         email = "terrytangyuan@gmail.com",
+         comment = c(ORCID = "0000-0001-5243-233X")),
+  person("Wenxuan", "Li", role = c("ctb")),
+  person("Nan", "Xiao", role = c("ctb", "cph")),
+  person("Zachary", "Deane-Mayer", role = c("ctb"))
+)
 URL: https://github.com/terrytangyuan/lfda
 BugReports: https://github.com/terrytangyuan/lfda/issues
 Maintainer: Yuan Tang <terrytangyuan@gmail.com>
