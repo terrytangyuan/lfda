@@ -8,7 +8,7 @@
 # lfda
 R package for performing and visualizing *Local Fisher Discriminant Analysis*, *Kernel Local Fisher Discriminant Analysis*, and *Semi-supervised Local Fisher Discriminant Analysis*. It's the first package with those methods implemented in native R language. It also provides visualization functions to easily visualize the dimension reduction results.
 
-Introduction to the algorithms and their application can be found [here](https://gastrograph.com/resources/whitepapers/local-fisher-discriminant-analysis-on-beer-style-clustering.html) and [here](http://www.ms.k.u-tokyo.ac.jp/software.html#LFDA). These methods are widely applied in feature extraction, dimensionality reduction, clustering, classification, information retrieval, and computer vision problems. An introduction to the package is also available in Chinese [here](https://cosx.org/2015/08/a-brief-description-of-the-method-and-the-algorithm-of-the-lfda-package/).
+Introduction to the algorithms and their application can be found [here](https://www.gastrograph.com/resources/local-fisher-discriminant-analysis-on-beer-style-clustering) and [here](http://www.ms.k.u-tokyo.ac.jp/software.html#LFDA). These methods are widely applied in feature extraction, dimensionality reduction, clustering, classification, information retrieval, and computer vision problems. An introduction to the package is also available in Chinese [here](https://cosx.org/2015/08/a-brief-description-of-the-method-and-the-algorithm-of-the-lfda-package/).
 
 Welcome any [feedback](https://github.com/terrytangyuan/lfda/issues) and [pull request](https://github.com/terrytangyuan/lfda/pulls).  
 
