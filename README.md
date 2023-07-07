@@ -1,3 +1,5 @@
+**Note**: This package has been maintained by [@terrytangyuan](https://github.com/terrytangyuan) since 2015. Please [consider sponsoring](https://github.com/sponsors/terrytangyuan)!
+
 [![Coverage Status](https://coveralls.io/repos/terrytangyuan/lfda/badge.svg?branch=master)](https://coveralls.io/r/terrytangyuan/lfda?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/lfda)](https://cran.r-project.org/package=lfda)
 [![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/grand-total/lfda)](https://cran.r-project.org/package=lfda)
